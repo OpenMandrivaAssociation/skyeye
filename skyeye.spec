@@ -5,20 +5,16 @@
 Name:		skyeye
 Version:	1.2.8
 Release:	%mkrel %rel 
-License:	GPL
-# TODO 
-Group:		Development/Tools
+License:	GPLv2
+Group:		Emulators
 Summary:	ARM, Mips, Coldfire simulator
 URL:		http://www.skyeye.org/index.shtml
 Source0:	%{name}-%{version}_%{pre_release}.tar.gz
 Patch0:     skyeye-1.2.8-fix_open_mode.diff
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
-# TODO 
-#BuildRequires:	libX11-devel, xorg-x11-proto-devel
 
 %description
-SkyEye is an Open Source Software Project (GPL Licence). Origin from GDB/Armulator, 
-the goal of SkyEye is to provide an integrated simulation environment in Linux 
+The goal of SkyEye is to provide an integrated simulation environment in Linux 
 and Windows. SkyEye environment simulates/emulates typical Embedded Computer
 Systems (Now it supports a series ARM architecture based microprocessors and 
 Blackfin DSP Processor). You can run some Embedded Operation System such as 
