@@ -12,6 +12,7 @@ URL:		http://www.skyeye.org/index.shtml
 Source0:	%{name}-%{version}_%{pre_release}.tar.gz
 Patch0:     skyeye-1.2.8-fix_open_mode.diff
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
+BuildRequires: pkgconfig(gtk+-2.0)
 
 %description
 The goal of SkyEye is to provide an integrated simulation environment in Linux 
@@ -27,7 +28,7 @@ them at source level.
 %patch0 -p0
 
 %build
-%configure
+%configure --enable-lcd
 %make 
 
 %install
