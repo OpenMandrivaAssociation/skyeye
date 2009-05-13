@@ -36,10 +36,17 @@ them at source level.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%makeinstall
+cp /usr/share/automake-1.10/mkinstalldirs ./third-party
+%makeinstall_std
 
+rm -Rf $RPM_BUILD_ROOT/%_libdir/*.{a,la}
+rm -Rf $RPM_BUILD_ROOT/%_includedir/
+rm -Rf $RPM_BUILD_ROOT/%_infodir/ 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,0755)
+%doc MAINTAINERS README ChangeLog
+%_bindir/skyeye
+
