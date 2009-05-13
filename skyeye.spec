@@ -11,6 +11,7 @@ Group:		Development/Tools
 Summary:	ARM, Mips, Coldfire simulator
 URL:		http://www.skyeye.org/index.shtml
 Source0:	%{name}-%{version}_%{pre_release}.tar.gz
+Patch0:     skyeye-1.2.8-fix_open_mode.diff
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 # TODO 
 #BuildRequires:	libX11-devel, xorg-x11-proto-devel
@@ -27,6 +28,7 @@ them at source level.
 
 %prep
 %setup -q -n %{name}-%{version}_%{pre_release}
+%patch0 -p0
 
 %build
 %configure
