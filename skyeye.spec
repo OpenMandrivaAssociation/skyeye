@@ -4,6 +4,7 @@
 
 %define major 0
 %define libname %mklibname %{name} %{major}
+%define develname %mklibname %{name} -d
 
 Name:		skyeye
 Version:	1.3.0
@@ -18,6 +19,7 @@ Patch1:		skyeye-1.3.0.fix-str-fmt.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires:	pkgconfig(gtk+-2.0)
 BuildRequires:	libxpm-devel
+BuildRequires:	binutils-devel 
 
 %description
 The goal of SkyEye is to provide an integrated simulation environment in Linux 
@@ -33,7 +35,15 @@ Group:		System/Libraries
 Provides:	%{libname} = %{version}
 	
 %description -n %{libname}
-%{name} library.  
+%{name} library.
+
+%package -n %{develname}
+Summary:	%{name} development library
+Group:		Development/Other
+Provides:	%{libname} = %{version}
+	
+%description -n %{develname}
+%{name} development library.  
 
 %prep
 %setup -q -n %{name}-%{version}_%{pre_release}
@@ -42,7 +52,7 @@ Provides:	%{libname} = %{version}
 
 %build
 autoreconf -fiv
-%configure2_5x --enable-lcd
+%configure2_5x --enable-lcd --enable-shared
 #libtool wants it badly
 mkdir third-party/opcodes/.libs
 mkdir third-party/bfd/.libs
@@ -57,12 +67,11 @@ rm -rf %{buildroot}
 #cp /usr/share/automake-1.10/mkinstalldirs ./third-party
 %makeinstall
 
+mv %{buildroot}%{_includedir}/include %{buildroot}%{_includedir}/%{name}
+
 #see later how to deal with it
 rm -rf %{buildroot}/usr/testsuite
 
-rm -Rf %{buildroot}/%_libdir/*.{a,la}
-rm -Rf %{buildroot}/%_includedir/
-rm -Rf %{buildroot}/%_infodir/ 
 %clean
 rm -rf %{buildroot}
 
@@ -75,5 +84,10 @@ rm -rf %{buildroot}
 %{_bindir}/uart_instance
 
 %files -n %{libname}
-%{_libdir}/*so.%{major}*
+%{_libdir}/%{name}/*so.%{major}*
+
+%files -n %{develname}
+%{_libdir}/%{name}/*.la
+%{_libdir}/%{name}/*.so
+%{_includedir}/%{name}/*
 
