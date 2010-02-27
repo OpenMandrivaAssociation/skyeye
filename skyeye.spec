@@ -19,7 +19,8 @@ Patch1:		skyeye-1.3.0.fix-str-fmt.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires:	pkgconfig(gtk+-2.0)
 BuildRequires:	libxpm-devel
-BuildRequires:	binutils-devel 
+BuildRequires:	binutils-devel
+BuildRequires:	readline-devel
 
 %description
 The goal of SkyEye is to provide an integrated simulation environment in Linux 
