@@ -2,6 +2,9 @@
 
 %define rel 0.%{pre_release}.1
 
+%define major 0
+%define libname %mklibname %{name} %{major}
+
 Name:		skyeye
 Version:	1.3.0
 Release:	%mkrel %rel 
@@ -14,6 +17,7 @@ Source0:	%{name}-%{version}_%{pre_release}.tar.gz
 Patch1:		skyeye-1.3.0.fix-str-fmt.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires:	pkgconfig(gtk+-2.0)
+BuildRequires:	libxpm-devel
 
 %description
 The goal of SkyEye is to provide an integrated simulation environment in Linux 
@@ -23,6 +27,13 @@ Blackfin DSP Processor). You can run some Embedded Operation System such as
 ARM Linux, uClinux, uc/OS-II (ucos-ii) etc. in SkyEye, and analysis or debug 
 them at source level.
 
+%package -n %{libname}
+Summary:	%{name} library
+Group:		System/Libraries
+Provides:	%{libname} = %{version}
+	
+%description -n %{libname}
+%{name} library.  
 
 %prep
 %setup -q -n %{name}-%{version}_%{pre_release}
@@ -32,7 +43,6 @@ them at source level.
 %build
 autoreconf -fiv
 %configure2_5x --enable-lcd
-
 #libtool wants it badly
 mkdir third-party/opcodes/.libs
 mkdir third-party/bfd/.libs
@@ -41,8 +51,6 @@ mkdir third-party/libiberty/pic
 mkdir third-party/readline/.libs
 
 %make
-
-
 
 %install
 rm -rf %{buildroot}
@@ -61,6 +69,11 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,0755)
 %doc MAINTAINERS README ChangeLog
-%{_bindir}/*
-%{_libdir}/*
+%{_bindir}/mknandflashdump
+%{_bindir}/prof_convert
+%{_bindir}/skyeye
+%{_bindir}/uart_instance
+
+%files -n %{libname}
+%{_libdir}/*so.%{major}*
 
