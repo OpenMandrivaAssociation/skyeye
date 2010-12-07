@@ -1,6 +1,6 @@
 %define pre_release rc1
 
-%define rel 0.%{pre_release}.1
+%define rel 0.%{pre_release}.2
 
 %define major 0
 %define libname %mklibname %{name} %{major}
