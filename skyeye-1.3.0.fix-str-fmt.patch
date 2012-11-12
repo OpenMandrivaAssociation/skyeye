@@ -1,0 +1,31 @@
+--- arch/x86/iodev/floppy.cc.orig	2009-10-16 16:58:40.000000000 +0200
++++ arch/x86/iodev/floppy.cc	2010-02-27 17:58:59.000000000 +0100
+@@ -685,7 +685,7 @@
+   for (i=0; i<BX_FD_THIS s.command_size; i++) {
+     p += sprintf(p, "[%02x] ", (unsigned) BX_FD_THIS s.command[i]);
+   }
+-  BX_DEBUG((buf));
++  BX_DEBUG(("%s", buf));
+ 
+   BX_FD_THIS s.pending_command = BX_FD_THIS s.command[0];
+   switch (BX_FD_THIS s.pending_command) {
+@@ -1812,7 +1812,7 @@
+   for (i=0; i<BX_FD_THIS s.result_size; i++) {
+     p += sprintf(p, "[%02x] ", (unsigned) BX_FD_THIS s.result[i]);
+   }
+-  BX_DEBUG((buf));
++  BX_DEBUG(("%s", buf));
+ }
+ 
+ void bx_floppy_ctrl_c::enter_idle_phase(void)
+--- arch/x86/iodev/hdimage.cc.orig	2009-10-21 16:36:51.000000000 +0200
++++ arch/x86/iodev/hdimage.cc	2010-02-27 18:08:06.000000000 +0100
+@@ -616,7 +616,7 @@
+   {
+     snprintf(buffer, sizeof(buffer), "error with sparse disk image %s - %s", pathname, message);
+   }
+-  BX_PANIC((buffer));
++  BX_PANIC(("%s", buffer));
+ }
+ 
+ ssize_t sparse_image_t::write (const void* buf, size_t count)
