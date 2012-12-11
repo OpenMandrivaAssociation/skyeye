@@ -29,3 +29,44 @@
  }
  
  ssize_t sparse_image_t::write (const void* buf, size_t count)
+
+
+--- third-party/include/dis-asm.h.orig      2009-09-23 16:01:02.000000000 +0200
++++ third-party/include/dis-asm.h   2012-11-25 16:42:18.379923242 +0100
+@@ -33,6 +33,7 @@
+ #endif
+ 
+ #include <stdio.h>
++#include <config.h>
+ #include "bfd.h"
+ 
+   typedef int (*fprintf_ftype) (void *, const char*, ...) /*ATTRIBUTE_FPTR_PRINTF_2*/;
+ 
+--- common/loader/loader_elf.c.orig   2009-09-23 16:01:02.000000000 +0200
++++ common/loader/loader_elf.c        2012-11-25 16:56:15.519562561 +0100
+@@ -234,6 +234,7 @@
+ #else //#ifndef HAVE_LIBBFD
+ 
+ //teawater add for load elf 2005.07.31------------------------------------------
++#include <config.h>
+ #include <bfd.h>
+ 
+ static exception_t
+ 
+--- utils/uart_console/uart_console.c.orig 2009-09-23 16:01:02.000000000 +0200
++++ utils/uart_console/uart_console.c      2012-11-25 17:25:50.737365582 +0100
+@@ -55,12 +55,14 @@
+ #include <sys/stream.h>
+ #include <thread.h>
+ #else
++/*
+ const uint32_t POLLRDNORM = 0x040; 
+ const uint32_t POLLRDBAND = 0x080; 
+ //const uint32_t POLLPRI = 0x002; 
+ //const uint32_t POLLOUT = 0x004; 
+ const uint32_t POLLWRNORM = 0x100; 
+ const uint32_t POLLWRBAND = 0x200;
++*/
+ #endif
+ 
+ static int setup_term();
