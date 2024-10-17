@@ -12,7 +12,7 @@ Release:%rel
 License:	GPLv2
 Group:		Emulators
 Summary:	ARM, Mips, Coldfire simulator
-URL:		http://www.skyeye.org/index.shtml
+URL:		https://www.skyeye.org/index.shtml
 Source0:	%{name}-%{version}_%{pre_release}.tar.gz
 Patch:		skyeye-1.3.0.fix-str-fmt.patch
 BuildRequires:	pkgconfig(gtk+-2.0)
